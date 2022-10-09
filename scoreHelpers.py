@@ -25,6 +25,7 @@ def generateScore(scoreName, videoURL, elementList):
     return result
 
 def writeScore(path, name, content):
-    with open(f"{path}/{name}.txt", 'w') as f:
+    fullPath = f"{path}/{name}.txt"
+    with open(fullPath, 'w') as f:
         f.write(content)
-        print(f"Content saved in: {path}/{name}.html")
+        print(f"Content saved in: {fullPath}")
