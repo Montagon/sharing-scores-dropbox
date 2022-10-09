@@ -15,8 +15,7 @@ A score is composed by:
 ### Dropbox API
 
 This project uses the [Dropbox API for Python](https://www.dropbox.com/developers/documentation/python). 
-So an App is needed (please check [here](https://www.dropbox.com/developers/apps/create)). Once the app is created, you will need to save the App key and App secret and 
-setup as enviroment variables:
+So an App is needed (please check [here](https://www.dropbox.com/developers/apps/create)). Once the app is created, you will need to save the App key and App secret and setup them as enviroment variables:
 
 ```powershell
 $env:DROPBOX_APP_KEY = "<APP_KEY>"
