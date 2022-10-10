@@ -1,4 +1,5 @@
 from os import listdir, environ
+import os
 import re
 from unittest import result
 import dropboxAPI
@@ -16,8 +17,8 @@ print("Introduce directory:")
 scorePath = input()
 path = scorePath
 
-pathDropbox = re.sub(".*Dropbox", "", path).replace('\\','/')
-scoreName = path.split("\\")[-1]
+pathDropbox = re.sub(".*Dropbox", "", path).replace(os.path.sep,'/')
+scoreName = path.split(os.path.sep)[-1]
 
 elements = configHelpers.getSearchElements(config)
 content = [x.lower() for x in listdir(path)]
