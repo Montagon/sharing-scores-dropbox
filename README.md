@@ -25,7 +25,7 @@ $env:DROPBOX_APP_SECRET = "<APP_SECRET>"
 After that, we need to generate the `refresh_token`. For this, use the helper `dropboxAPI.py` module and follow the steps:
 
 ```powershell
-> python.exe .\dropboxAPI.py
+> poetry run python src/dropboxAPI.py
 ```
 
 Then, save it as another environment var:
