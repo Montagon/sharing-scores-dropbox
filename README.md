@@ -40,7 +40,7 @@ Basically, the plugins offers the possibility to add access rules to the users, 
 
 #### Config
 
-The [application.conf](application.conf) contains a JSON object that contains a list of items. Each item have the following properties:
+The [application.conf](src/application.conf) contains a JSON object that contains a list of items. Each item have the following properties:
 - `name`. Represents the name that will be used to identify in the folder the correct file/folder to be shared.
 - `restrict-level`. Represents the restrict level defined in the plugin that reffers to this item. It will be necessary to use the same values as defined in the plugin.
 - `publishName`. Represents the name that will appear in the Wordpress entry.

@@ -6,9 +6,20 @@ import dropboxAPI
 import configHelpers
 import scoreHelpers
 
-appKey = environ['DROPBOX_APP_KEY']
-appSecret = environ['DROPBOX_APP_SECRET']
-refreshToken = environ['DROPBOX_REFRESH_TOKEN']
+
+appKey = os.getenv('DROPBOX_APP_KEY')
+appSecret = os.getenv('DROPBOX_APP_SECRET')
+refreshToken = os.getenv('DROPBOX_REFRESH_TOKEN')
+
+if appKey is None or appKey == "":
+    print("ERROR: The 'DROPBOX_APP_KEY' must be set")
+    exit()
+if appSecret is None or appSecret == "":
+    print("ERROR: The 'DROPBOX_APP_SECRET' must be set")
+    exit()
+if refreshToken is None or refreshToken == "":
+    print("ERROR: The 'DROPBOX_REFRESH_TOKEN' must be set")
+    exit()
 
 config = configHelpers.readConfig()
 dbx = dropboxAPI.getDropboxSession(appKey, appSecret, refreshToken)
