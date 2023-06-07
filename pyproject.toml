@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "sharing-scores-dropbox"
+version = "0.1.0"
+description = ""
+authors = ["Jose Carlos M. Aragon <josecarlos.aragon@47deg.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10.0"
+pytest = "^7.3.1"
+dropbox = "^11.36.0"
+flake8 = "^6.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "src"
+]
+testpaths = [
+    "tests"
+]
