@@ -47,8 +47,8 @@ The [application.conf](src/application.conf) contains a JSON object that contain
 
 ## Run
 
-Once configured, launch the program by calling:
+This project uses `Poetry`, so once configured, you can launch the program by calling:
 
 ```powershell
-> python.exe .\generateScore.py
+> poetry run python src/generateScore.py
 ```
