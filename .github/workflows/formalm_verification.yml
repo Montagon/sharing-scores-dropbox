@@ -1,4 +1,4 @@
-name: Run FormaLM analysis
+name: Run FormaLM analysis on Python
 defaults:
   run:
     shell: bash
