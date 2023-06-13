@@ -54,7 +54,7 @@ jobs:
       - name: Setup OPENAI token
         run: echo "OPENAI_TOKEN=${{ secrets.OPENAI_TOKEN }} " >> $GITHUB_ENV
       - name: Adding Poetry to path
-        run: echo "PATH=\$PATH:/root/.local/share/pypoetry/venv/bin/poetry" >> $GITHUB_ENV
+        run: echo "PATH=$PATH:/root/.local/share/pypoetry/venv/bin/poetry" >> $GITHUB_ENV
       - name: Testing
         run: poetry --version
       - name: Run FormaLM analysis
