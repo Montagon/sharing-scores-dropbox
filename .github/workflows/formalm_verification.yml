@@ -57,7 +57,8 @@ jobs:
         run: |
           /root/.local/share/pypoetry/venv/bin/poetry --version
           echo "/root/.local/share/pypoetry/venv/bin/poetry" >> $GITHUB_PATH
-          poetry --version
+      - name: Testing
+        run: poetry --version
       - name: Run FormaLM analysis
         run: java -jar /home/gradle/formalm/formalm-0.0.1-SNAPSHOT.jar repo-path="$GITHUB_WORKSPACE" output-path="/home/gradle/report.sarif" scoverage-restrict-results=5
       - name: Show SARIF file
