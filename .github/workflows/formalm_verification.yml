@@ -54,9 +54,9 @@ jobs:
       - name: Setup OPENAI token
         run: echo "OPENAI_TOKEN=${{ secrets.OPENAI_TOKEN }} " >> $GITHUB_ENV
       - name: Adding Poetry to path
-        run: echo "PATH=$PATH:/root/.local/share/pypoetry/venv/bin/poetry" >> $GITHUB_ENV
+        run: echo "/root/.local/share/pypoetry/venv/bin/poetry" >> $GITHUB_PATH
       - name: Testing
-        run: poetry --version
+        run: echo $GITHUB_PATH
       - name: Run FormaLM analysis
         run: java -jar /home/gradle/formalm/formalm-0.0.1-SNAPSHOT.jar repo-path="$GITHUB_WORKSPACE" output-path="/home/gradle/report.sarif" scoverage-restrict-results=5
       - name: Show SARIF file
