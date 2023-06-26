@@ -5,6 +5,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: a
         run: cat ${{ github.workspace }}/summary.md
       - uses: actions/github-script@v6
