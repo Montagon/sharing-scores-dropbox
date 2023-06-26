@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: a
-        run: echo "${ cat ${{ github.workspace }}/summary.md}"
+        run: cat ${{ github.workspace }}/summary.md
       - uses: actions/github-script@v6
         with:
           script: |
