@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: a
-        run: echo "${{ env.BASE_DIR }}/summary.md"
+        run: echo summary.md
       - uses: actions/github-script@v6
         with:
           script: |
@@ -14,5 +14,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: echo "${{ env.BASE_DIR }}/summary.md"
+              body: "echo ${{ env.BASE_DIR }}/summary.md"
             })
