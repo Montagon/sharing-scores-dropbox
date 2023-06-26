@@ -10,7 +10,7 @@ jobs:
         id: read-file
         run: | 
           file_content=$(cat ${{ github.workspace }}/summary.md)
-          echo "::set-output name=fileContent::$file_content"
+          echo "fileContent=file_content" >> $GITHUB_OUTPUT
       - name: test
         run: cat ${{ steps.read-file.outputs.fileContent }}
       - uses: actions/github-script@v6
