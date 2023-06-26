@@ -17,9 +17,8 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            files=$(find ${process.env.GITHUB_WORKSPACE}/reports/ -type f -r)
+            files=$(find reports/ -type f -r)
             while IFS= read -r file; do
-              const filePath = `${process.env.GITHUB_WORKSPACE}/summary.md`;
               const body = fs.readFileSync(file, 'utf8');
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
