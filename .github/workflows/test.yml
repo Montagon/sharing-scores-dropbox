@@ -17,13 +17,15 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            files=$(find reports/ -type f)
-            while IFS= read -r file; do
-              const body = fs.readFileSync($file, 'utf8');
+            const execSync = require('child_process').execSync;
+            const files = execSync('find reports/ -type f').toString().split('\n').filter(Boolean);
+      
+            files.forEach(file => {
+              const body = fs.readFileSync(file, 'utf8');
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: body
-              })
-            done <<< $files
+              });
+            });
