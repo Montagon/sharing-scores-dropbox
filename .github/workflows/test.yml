@@ -6,13 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Read file content
-        id: read-file
-        run: | 
-          file_content=$(cat ${{ github.workspace }}/summary.md)
-          echo "FILE_CONTENT=$file_content" >> $GITHUB_OUTPUT
-      - name: test
-        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
+#      - name: Read file content
+#        id: read-file
+#        run: |
+#          file_content=$(cat ${{ github.workspace }}/summary.md)
+#          echo "FILE_CONTENT=$file_content" >> $GITHUB_OUTPUT
+#      - name: test
+#        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
       - uses: actions/github-script@v6
         with:
           script: |
