@@ -5,12 +5,8 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: b
-        run: pwd
-      - name: c
-        run: ls
       - name: a
-        run: echo ${{ github.workspace }}/summary.md
+        run: echo "${ cat ${{ github.workspace }}/summary.md}"
       - uses: actions/github-script@v6
         with:
           script: |
