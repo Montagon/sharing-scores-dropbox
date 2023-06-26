@@ -10,7 +10,7 @@ jobs:
       - name: c
         run: ls
       - name: a
-        run: echo summary.md
+        run: echo ${{ github.workspace }}/summary.md
       - uses: actions/github-script@v6
         with:
           script: |
