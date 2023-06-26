@@ -16,7 +16,9 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const body = $(cat ${{ github.workspace }}/summary.md)
+            const fs = require('fs');
+            const filePath = `${process.env.GITHUB_WORKSPACE}/summary.md`;
+            const body = fs.readFileSync(filePath, 'utf8');
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
