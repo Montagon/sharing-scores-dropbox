@@ -5,6 +5,10 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: b
+        run: pwd
+      - name: c
+        run: ls
       - name: a
         run: echo summary.md
       - uses: actions/github-script@v6
