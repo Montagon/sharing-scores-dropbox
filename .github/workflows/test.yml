@@ -17,9 +17,9 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            files=$(find reports/ -type f -r)
+            files=$(find reports/ -type f)
             while IFS= read -r file; do
-              const body = fs.readFileSync(file, 'utf8');
+              const body = fs.readFileSync($file, 'utf8');
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
