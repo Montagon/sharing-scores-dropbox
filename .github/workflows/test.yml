@@ -11,10 +11,12 @@ jobs:
         run: | 
           file_content=$(cat ${{ github.workspace }}/summary.md)
           echo "::set-output name=fileContent::$file_content"
+      - name: test
+        run: cat ${{ steps.read-file.outputs.fileContent }}
       - uses: actions/github-script@v6
         with:
           script: |
-            const body = $(cat ${{ github.workspace }}/summary.md)
+            const body = '${{ steps.read-file.outputs.fileContent }}'
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
