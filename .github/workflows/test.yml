@@ -6,12 +6,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: a
-        run: cat ${{ github.workspace }}/summary.md
+      - name: Read file content
+        id: read-file
+        run: | 
+          file_content=$(cat ${{ github.workspace }}/summary.md)
+          echo "::set-output name=fileContent::$file_content"
       - uses: actions/github-script@v6
         with:
           script: |
-            const body = $(cat ${{ github.workspace }}/summary.md)
+            const body = '${{ steps.read-file.outputs.fileContent }}'
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
