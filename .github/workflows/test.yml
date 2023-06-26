@@ -14,7 +14,6 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-#            const body = '${{ steps.read-file.outputs.fileContent }}'
             const body = $(cat ${{ github.workspace }}/summary.md)
             github.rest.issues.createComment({
               issue_number: context.issue.number,
