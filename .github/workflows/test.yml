@@ -16,19 +16,12 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const fs = require('fs');
-            const execSync = require('child_process').execSync;
-            const files = execSync('find reports/ -type f').toString().split('\n').filter(Boolean);
-      
-            files.forEach(file => {
-              const body = fs.readFileSync(file, 'utf8');
-              github.rest.pulls.createReviewComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.pull.number,
-                path: "src/application.conf",
-                body: body,
-                start_line: 1,
-                line: 2
-              });
+            github.rest.pulls.createReviewComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.pull.number,
+              path: "src/application.conf",
+              body: "body",
+              start_line: 1,
+              line: 2
             });
