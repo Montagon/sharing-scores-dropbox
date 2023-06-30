@@ -23,9 +23,6 @@ jobs:
               body: "illo yo k se, espabila",
               commit_id: context.payload.pull_request.head.sha,
               path: '.github/workflows/test.yml',
-              start_line: 11,
-              end_line: 12,
-              line: 11,
-              start_side:'RIGHT'
+              position: 11
             });
 
