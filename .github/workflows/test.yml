@@ -21,5 +21,11 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.issue.number,
               body: "Suggestion",
-              event: "COMMENT"
+              event: "COMMENT",
+              comments: [{
+                path: "src/application.conf",
+                body: "body\n@@ -1,2 +1,2 @@\n-[\n+{\n-  {+\  [",
+                start_line: 1,
+                line: 2
+              }]
             });
