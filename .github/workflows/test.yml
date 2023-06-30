@@ -20,9 +20,10 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              body: "illo yo k se, espabila",
+              body: 'illo yo k se, espabila',
               commit_id: context.payload.after,
-              path: "src/application.conf",
+              path: 'src/application.conf',
               start_line: 1,
-              line: 2
+              line: 2,
+              start_side':'RIGHT'
             });
