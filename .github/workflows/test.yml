@@ -19,16 +19,18 @@ jobs:
             const fs = require('fs');
             const body = fs.readFileSync("reports/iac/a_third_one.md", 'utf8');
             
-            github.rest.pulls.createReviewComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-              body: body,
-              commit_id: context.payload.pull_request.head.sha,
-              path: '.github/workflows/test.yml',
-              side: "RIGHT",
-              start_line: 8,
-              start_side: "RIGHT",
-              line: 11
-            });
+            for (let i = 0; i < 10; i++) {
+              github.rest.pulls.createReviewComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                body: body,
+                commit_id: context.payload.pull_request.head.sha,
+                path: '.github/workflows/test.yml',
+                side: "RIGHT",
+                start_line: 8,
+                start_side: "RIGHT",
+                line: 11
+              });
+            }
 
