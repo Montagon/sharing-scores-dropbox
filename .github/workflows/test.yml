@@ -16,11 +16,14 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            const fs = require('fs');
+            const body = fs.readFileSync(/home/gradle/reports/iac/a_third_one.md, 'utf8');
+            
             github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              body: "illo yo k se, espabila",
+              body: body,
               commit_id: context.payload.pull_request.head.sha,
               path: '.github/workflows/test.yml',
               position: 11

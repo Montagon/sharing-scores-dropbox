@@ -1,4 +1,12 @@
-# IaC Report
+I would change this:
 
-The project contains the following deployments...
-
+```suggestion
+-      - uses: actions/checkout@v2
+-#      - name: Read file content
+-#        id: read-file
+-#        run: |
++#      - uses: actions/checkout@v2
++      - name: Read file content
++        id: read-file
++        run: |
+```
