@@ -17,13 +17,3 @@ jobs:
         with:
           script: |
             console.log(context);
-            github.rest.pulls.createReviewComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-              body: "illo yo k se, espabila",
-              commit_id: ,
-              path: "src/application.conf",
-              start_line: 1,
-              line: 2
-            });
