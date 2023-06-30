@@ -25,5 +25,5 @@ jobs:
               path: 'src/application.conf',
               start_line: 1,
               line: 2,
-              start_side':'RIGHT'
+              start_side:'RIGHT'
             });
