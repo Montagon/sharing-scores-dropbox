@@ -16,16 +16,14 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            github.rest.pulls.createReview({
+            console.log(context);
+            github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              body: "Suggestion",
-              event: "COMMENT",
-              comments: [{
-                path: "src/application.conf",
-                body: "body\n```suggestion\n[\n{\n```",
-                start_line: 1,
-                line: 2
-              }]
+              body: "illo yo k se, espabila",
+              commit_id: ,
+              path: "src/application.conf",
+              start_line: 1,
+              line: 2
             });
