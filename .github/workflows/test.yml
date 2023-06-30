@@ -16,13 +16,13 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            github.rest.pulls.createComment({
+            github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
               body: "illo yo k se, espabila",
               commit_id: context.payload.pull_request.head.sha,
-              diff_hunk: "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
+              diff_hunk: "@@ -5,7 +5,7 @@ def greeting(name): return f"Hello, {name}!"; def main(): print(greeting("Eve")); print(greeting("Frank")); print(greeting("Grace")); print(greeting("Henry")); if __name__ == "__main__": main();",
               path: 'src/application.conf',
               start_line: 1,
               line: 2,
