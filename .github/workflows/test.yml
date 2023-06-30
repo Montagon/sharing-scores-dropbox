@@ -19,10 +19,10 @@ jobs:
             console.log("before");
             console.log(context.issue.number);
             console.log("after");
-            github.rest.pulls.createReviewComment({
+            github.rest.pulls.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number,
+              issue_number: context.issue.number,
               path: "src/application.conf",
               body: "body",
               start_line: 1,
