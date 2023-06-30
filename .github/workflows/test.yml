@@ -23,7 +23,7 @@ jobs:
               body: "Suggestion",
               event: "COMMENT",
               comments: [{
-                path: "/src/application.conf",
+                path: "src/application.conf",
                 body: "body",
                 start_line: 1,
                 line: 2
