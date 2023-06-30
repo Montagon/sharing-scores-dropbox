@@ -41,9 +41,6 @@ jobs:
 
       - name: Create Comment
         run: |
-          const { Octokit } = require("@octokit/rest");
-          const fs = require("fs");
-          
           const octokit = new Octokit({
             auth: process.env.GITHUB_TOKEN
           });
