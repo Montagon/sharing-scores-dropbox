@@ -17,7 +17,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const body = fs.readFileSync("/home/gradle/reports/iac/a_third_one.md", 'utf8');
+            const body = fs.readFileSync("reports/iac/a_third_one.md", 'utf8');
             
             github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
