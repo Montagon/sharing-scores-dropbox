@@ -26,7 +26,7 @@ jobs:
               body: body,
               commit_id: context.payload.pull_request.head.sha,
               path: '.github/workflows/test.yml',
-              subject_type: "FILE",
+              side: "RIGHT",
               start_line: 11,
               start_side: "RIGHT",
               line: 15
