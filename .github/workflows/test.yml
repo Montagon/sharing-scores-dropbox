@@ -16,14 +16,11 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log("before");
-            console.log(context.issue.number);
-            console.log("after");
-            github.rest.pulls.createReviewComment({
+            github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number,
-              path: "src/application.conf",
+              issue_number: context.issue.number,
+              path: "/src/application.conf",
               body: "body",
               start_line: 1,
               line: 2
