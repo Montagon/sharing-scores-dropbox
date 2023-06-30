@@ -22,10 +22,13 @@ jobs:
       
             files.forEach(file => {
               const body = fs.readFileSync(file, 'utf8');
-              github.rest.issues.createComment({
+              github.rest.issues.createReviewComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: body
+                body: body,
+                start_line: 1,
+                start_side: "RIGHT",
+                line: 2
               });
             });
