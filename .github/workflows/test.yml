@@ -21,11 +21,5 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.issue.number,
               body: "Suggestion",
-              event: "COMMENT",
-              comments: [{
-                path: "src/application.conf",
-                body: "body",
-                start_line: 1,
-                line: 2
-              }]
+              event: "COMMENT"
             });
