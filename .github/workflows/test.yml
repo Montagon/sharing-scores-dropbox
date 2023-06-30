@@ -20,7 +20,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              diff_hunk: "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
               body: "illo yo k se, espabila",
               commit_id: context.payload.after,
               path: "src/application.conf",
