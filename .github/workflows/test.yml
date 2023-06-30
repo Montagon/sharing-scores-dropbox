@@ -16,4 +16,13 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(context.payload.after);
+            github.rest.pulls.createReviewComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              body: "illo yo k se, espabila",
+              commit_id: context.payload.after,
+              path: "src/application.conf",
+              start_line: 1,
+              line: 2
+            });
