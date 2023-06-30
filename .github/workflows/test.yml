@@ -16,7 +16,9 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            console.log("before");
             console.log(context.pull.number);
+            console.log("after");
             github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
