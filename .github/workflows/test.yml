@@ -22,7 +22,7 @@ jobs:
               pull_number: context.issue.number,
               body: "illo yo k se, espabila",
               commit_id: context.payload.pull_request.head.sha,
-              diff_hunk: "@@ -5,7 +5,7 @@ def greeting(name): return f"Hello, {name}!"; def main(): print(greeting("Eve")); print(greeting("Frank")); print(greeting("Grace")); print(greeting("Henry")); if __name__ == "__main__": main();",
+              diff_hunk: "@@ -3,4 +3,4 @@     -\"name\": \"guion\",; -\"restrict-level\": \"director\; -\"name\": \"gon\",; -\"restrict-level\": \"dctor\" ",
               path: 'src/application.conf',
               start_line: 1,
               line: 2,
