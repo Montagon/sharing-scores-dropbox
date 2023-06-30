@@ -17,7 +17,7 @@ jobs:
         with:
           script: |
             console.log("before");
-            console.log(context.pull.number);
+            console.log(context.issue.number);
             console.log("after");
             github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
