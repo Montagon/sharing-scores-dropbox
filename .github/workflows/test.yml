@@ -16,12 +16,13 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            val githubId = ${GITHUB_SHA}
             github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
               body: "illo yo k se, espabila",
-              commit_id: ${GITHUB_SHA},
+              commit_id: githubId,
               path: 'src/application.conf',
               start_line: 1,
               line: 2,
