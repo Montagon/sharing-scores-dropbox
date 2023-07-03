@@ -18,15 +18,18 @@ jobs:
           script: |
             const fs = require('fs');
             const execSync = require('child_process').execSync;
-            const files = execSync('find reports/ -type f').toString().split('\n').filter(Boolean);
+            const files = execSync('find iac-suggestions/ -type f').toString().split('\n').filter(Boolean);
             const comments = [];
             files.forEach(file => {
-              const body = fs.readFileSync(file, 'utf8');
-              const path = '.github/workflows/test.yml';
+              const filename = file.substring(file.lastIndexOf("/") + 1, file.lastIndexOf("."));
+              const info = filename.split("-");
+            
+              const body = fs.readFileSync(file, 'utf8').split("\n");
+              const path = body.shift();
               const side = "RIGHT";
-              const start_line = 8;
+              const start_line = parseInt(info[info.length - 2]);
               const start_side = "RIGHT";
-              const line = 11;
+              const line = parseInt(info[info.length - 1]);
               const comment = {
                 body: body,
                 path: path,
