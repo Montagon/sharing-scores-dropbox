@@ -17,6 +17,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
+            const execSync = require('child_process').execSync;
             const files = execSync('find reports/ -type f').toString().split('\n').filter(Boolean);
             const comments = [];
             files.forEach(file => {
