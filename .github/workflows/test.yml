@@ -31,7 +31,7 @@ jobs:
               const start_side = "RIGHT";
               const line = parseInt(info[info.length - 1]);
               const comment = {
-                body: body,
+                body: body.join("\n"),
                 path: path,
                 side: side,
                 start_line: start_line,
