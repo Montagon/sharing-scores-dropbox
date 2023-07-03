@@ -35,7 +35,7 @@ jobs:
                 line: line
               };
               comments.push(comment);
-            }
+            });
             github.rest.pulls.createReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
