@@ -17,20 +17,30 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const body = fs.readFileSync("reports/iac/a_third_one.md", 'utf8');
-            
-            for (let i = 0; i < 10; i++) {
-              github.rest.pulls.createReviewComment({
+            const files = execSync('find reports/ -type f').toString().split('\n').filter(Boolean);
+            const comments = [];
+            files.forEach(file => {
+              const body = fs.readFileSync(file, 'utf8');
+              const path = '.github/workflows/test.yml';
+              const side = "RIGHT";
+              const start_line = 8;
+              const start_side = "RIGHT";
+              const line = 11;
+              const comment = {
+                body: body,
+                path: path,
+                side: side,
+                start_line: start_line,
+                start_side: start_side,
+                line: line
+              };
+              comments.push(comment);
+            }
+            github.rest.pulls.createReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: context.issue.number,
-                body: body,
                 commit_id: context.payload.pull_request.head.sha,
-                path: '.github/workflows/test.yml',
-                side: "RIGHT",
-                start_line: 8,
-                start_side: "RIGHT",
-                line: 11
+                comments: comments
               });
-            }
 
