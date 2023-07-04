@@ -16,9 +16,25 @@ jobs:
       - name: List files
         id: listFiles
         run: |
-          jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
+          const jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
           echo $jsonContent
-          echo "JSON_CONTENT="$jsonContent >> "$GITHUB_OUTPUT"
+          const diffArray = JSON.parse(jsonContent);
+          const fileLinesMap = new Map();
+
+          diffArray.forEach(diff => {
+            const { filename, patch } = diff;
+
+            const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
+            if (patchLines) {
+              const startLine = parseInt(patchLines[1], 10);
+              const endLine = startLine + parseInt(patchLines[2], 10) - 1;
+
+              fileLinesMap.set(filename, { startLine, endLine });
+            }
+          });
+
+          console.log(fileLinesMap);
+          echo "JSON_CONTENT="fileLinesMap >> "$GITHUB_OUTPUT"
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OWNER: ${{ github.repository_owner }}
