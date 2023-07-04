@@ -17,22 +17,16 @@ jobs:
         id: listFiles
         run: |
           jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
-          # Iterate over each object in the array
-          echo "$jsonString" | jq -c '.[]' | while IFS= read -r object; do
-            name=$(echo "$object" | jq -r '.filename')
-            age=$(echo "$object" | jq -r '.age')
-            email=$(echo "$object" | jq -r '.email')
-          
-            echo "Name: $name"
-            echo "Age: $age"
-            echo "Email: $email"
-            echo "---"
-          done
+          echo "JSON_CONTENT="jsonContent >> "$GITHUB_OUTPUT"
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OWNER: ${{ github.repository_owner }}
             REPO: ${{ github.event.repository.name }}
             PULL_NUMBER: ${{ github.event.pull_request.number }}
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(${{steps.captureStatus.outputs.response}})
 
 #      - name: Showing content
 #        uses: actions/github-script@v6
