@@ -31,6 +31,7 @@ jobs:
           script: |
             const content = ${{ steps.listFiles.outputs.JSON_CONTENT}};
             console.log(content);
+            console.log("HOLA");
             const diffArray = JSON.parse(content);
             const fileLinesMap = new Map();
 
@@ -45,7 +46,6 @@ jobs:
                 fileLinesMap.set(filename, { startLine, endLine });
               }
             });
-
             console.log(fileLinesMap);
       - uses: actions/github-script@v6
         with:
