@@ -17,7 +17,6 @@ jobs:
         id: listFiles
         run: |
           jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
-          echo $jsonContent
           # Iterate over each object in the array
           echo "$jsonString" | jq -c '.[]' | while IFS= read -r object; do
             name=$(echo "$object" | jq -r '.filename')
