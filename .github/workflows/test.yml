@@ -15,10 +15,7 @@ jobs:
 #        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
       - name: List files
         run: >
-          gh api 
-            -H "Accept: application/vnd.github+json" 
-            -H "X-GitHub-Api-Version: 2022-11-28" 
-            /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files
+          gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OWNER: ${{ github.repository_owner }}
