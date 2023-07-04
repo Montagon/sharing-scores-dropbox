@@ -1,4 +1,4 @@
-kubernetes/configs/deployment.yaml
+iac-suggestions/suggestion-deployment-KSV003-18-24.md
 
 #### Default capabilities not dropped
 
