@@ -23,7 +23,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OWNER: ${{ github.repository_owner }}
             REPO: ${{ github.event.repository.name }}
-            PULL_NUMBER: ${{ github.event.issue.number }}
+            PULL_NUMBER: ${{ github.event.pull_request.number }}
 
       - uses: actions/github-script@v6
         with:
