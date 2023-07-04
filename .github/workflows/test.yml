@@ -29,7 +29,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const content = steps.listFiles.outputs.JSON_CONTENT;
+            const content = ${{ steps.listFiles.outputs.JSON_CONTENT}};
             console.log(content);
             const diffArray = JSON.parse(content);
             const fileLinesMap = new Map();
