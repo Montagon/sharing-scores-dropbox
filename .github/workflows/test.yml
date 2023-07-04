@@ -15,14 +15,16 @@ jobs:
 #        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
       - name: List files
         uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.pulls.listFiles({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_numer: context.issue.number
-            });
-            
+        run: >
+          gh api 
+            -H "Accept: application/vnd.github+json" 
+            -H "X-GitHub-Api-Version: 2022-11-28" 
+            /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            OWNER: ${{ github.repository_owner }}
+            REPO: ${{ github.event.repository.name }}
+            PULL_NUMBER: ${{ github.event.issue.number }}
 
       - uses: actions/github-script@v6
         with:
