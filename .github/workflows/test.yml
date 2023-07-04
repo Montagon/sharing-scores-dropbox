@@ -15,7 +15,30 @@ jobs:
 #        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
       - name: List files
         run: >
-          gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files
+          jsonResponse=gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files
+          // Parse the JSON string into an array of objects
+          const diffArray = JSON.parse(jsonResponse);
+
+          // Create a map to store filename as key and start/end lines as value
+          const fileLinesMap = new Map();
+
+          // Iterate over the array and extract the filename and start/end lines
+          diffArray.forEach(diff => {
+            const { filename, patch } = diff;
+
+            // Parse the patch to obtain start and end lines
+            const patchLines = patch.match(/@@ -\d+,\d+ \+(\d+),(\d+) @@/);
+            if (patchLines) {
+              const startLine = parseInt(patchLines[1], 10);
+              const endLine = startLine + parseInt(patchLines[2], 10) - 1;
+
+              // Store the filename and start/end lines in the map
+              fileLinesMap.set(filename, { startLine, endLine });
+            }
+          });
+
+          // Print the resulting map
+          console.log(fileLinesMap);
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OWNER: ${{ github.repository_owner }}
