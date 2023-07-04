@@ -18,7 +18,7 @@ jobs:
         run: |
           jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
           echo "JSON_CONTENT="fileLinesMap >> "$GITHUB_OUTPUT"
-          echo "jsonContent" | jq -c '.[]' | while IFS= read -r object; do
+          echo jsonContent | jq -c '.[]' | while IFS= read -r object; do
             name=$(echo "$object" | jq -r '.filename')
             echo "Name: $name"
             echo "---"
