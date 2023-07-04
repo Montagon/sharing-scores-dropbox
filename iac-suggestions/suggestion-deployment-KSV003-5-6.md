@@ -1,4 +1,4 @@
-iac-suggestions/suggestion-deployment-KSV003-18-24.md
+iac-suggestions/suggestion-deployment-KSV003-5-6.md
 
 #### Default capabilities not dropped
 
