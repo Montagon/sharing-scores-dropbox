@@ -14,7 +14,6 @@ jobs:
 #      - name: test
 #        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
       - name: List files
-        uses: actions/github-script@v6
         run: >
           gh api 
             -H "Accept: application/vnd.github+json" 
