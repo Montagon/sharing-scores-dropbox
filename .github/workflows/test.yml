@@ -28,44 +28,20 @@ jobs:
         with:
           script: |
             const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
-
             const fileLinesMap = new Map();
-
             content.forEach(diff => {
               const { filename, patch } = diff;
 
               const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
               if (patchLines) {
                 const startLine = parseInt(patchLines[1], 10);
-                const endLine = startLine + parseInt(patchLines[2], 10) - 1;
-
+                endLine = startLine + parseInt(patchLines[2], 10) - 1;
+                if(endLine < 0)
+                  endLine = 0
                 fileLinesMap.set(filename, { startLine, endLine });
               }
             });
             console.log(fileLinesMap);
-
-#      - name: Showing content
-#        uses: actions/github-script@v6
-#        with:
-#          script: |
-#            const content = ${{ steps.listFiles.outputs.JSON_CONTENT}};
-#            console.log(content);
-#            console.log("HOLA");
-#            const diffArray = JSON.parse(content);
-#            const fileLinesMap = new Map();
-#
-#            diffArray.forEach(diff => {
-#              const { filename, patch } = diff;
-#
-#              const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
-#              if (patchLines) {
-#                const startLine = parseInt(patchLines[1], 10);
-#                const endLine = startLine + parseInt(patchLines[2], 10) - 1;
-#
-#                fileLinesMap.set(filename, { startLine, endLine });
-#              }
-#            });
-#            console.log(fileLinesMap);
       - uses: actions/github-script@v6
         with:
           script: |
