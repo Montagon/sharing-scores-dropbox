@@ -28,7 +28,7 @@ jobs:
         with:
           script: |
             const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
-            console.log(typeof content)
+            console.log(typeof content);
 #            const updatedContent = content.toString.replace(/\n/g, '\\n');
 #            console.log(updatedContent);
 #            const diffArray = JSON.parse(updatedContent);
