@@ -23,10 +23,26 @@ jobs:
             OWNER: ${{ github.repository_owner }}
             REPO: ${{ github.event.repository.name }}
             PULL_NUMBER: ${{ github.event.pull_request.number }}
-      - uses: actions/github-script@v6
+      - name: Showing content
+        uses: actions/github-script@v6
         with:
           script: |
-            console.log(${{steps.listFiles.outputs.JSON_CONTENT}})
+            const content = ${{steps.listFiles.outputs.JSON_CONTENT}}
+            const diffArray = JSON.parse(content);
+            const fileLinesMap = new Map();
+
+            diffArray.forEach(diff => {
+              const { filename, patch } = diff;
+
+              const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
+              if (patchLines) {
+                const startLine = parseInt(patchLines[1], 10);
+                const endLine = startLine + parseInt(patchLines[2], 10) - 1;
+
+                fileLinesMap.set(filename, { startLine, endLine });
+              }
+            });
+            console.log(fileLinesMap);
 
 #      - name: Showing content
 #        uses: actions/github-script@v6
