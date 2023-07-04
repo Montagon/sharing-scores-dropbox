@@ -13,6 +13,18 @@ jobs:
 #          echo "FILE_CONTENT=$file_content" >> $GITHUB_OUTPUT
 #      - name: test
 #        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
+      - name: List files
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const response = github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_numer: context.issue.number
+            });
+            console.log(response);
+            
+
       - uses: actions/github-script@v6
         with:
           script: |
