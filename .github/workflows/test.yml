@@ -15,7 +15,7 @@ jobs:
 #        run: echo ${{ steps.read-file.outputs.FILE_CONTENT }}
       - name: List files
         id: listFiles
-        run: >
+        run: |
           jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
           echo $jsonContent
           echo "JSON_CONTENT="$jsonContent >> "$GITHUB_OUTPUT"
