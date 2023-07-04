@@ -16,24 +16,8 @@ jobs:
       - name: List files
         id: listFiles
         run: |
-          const jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
+          jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
           echo $jsonContent
-          const diffArray = JSON.parse(jsonContent);
-          const fileLinesMap = new Map();
-
-          diffArray.forEach(diff => {
-            const { filename, patch } = diff;
-
-            const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
-            if (patchLines) {
-              const startLine = parseInt(patchLines[1], 10);
-              const endLine = startLine + parseInt(patchLines[2], 10) - 1;
-
-              fileLinesMap.set(filename, { startLine, endLine });
-            }
-          });
-
-          console.log(fileLinesMap);
           echo "JSON_CONTENT="fileLinesMap >> "$GITHUB_OUTPUT"
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +26,27 @@ jobs:
             PULL_NUMBER: ${{ github.event.pull_request.number }}
 
       - name: Showing content
-        run: echo "${{ steps.listFiles.outputs.JSON_CONTENT }}"
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const content = steps.listFiles.outputs.JSON_CONTENT;
+            console.log(content);
+            const diffArray = JSON.parse(content);
+            const fileLinesMap = new Map();
+
+            diffArray.forEach(diff => {
+              const { filename, patch } = diff;
+
+              const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
+              if (patchLines) {
+                const startLine = parseInt(patchLines[1], 10);
+                const endLine = startLine + parseInt(patchLines[2], 10) - 1;
+
+                fileLinesMap.set(filename, { startLine, endLine });
+              }
+            });
+
+            console.log(fileLinesMap);
       - uses: actions/github-script@v6
         with:
           script: |
