@@ -27,9 +27,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const content = ${{steps.listFiles.outputs.JSON_CONTENT}}
+            const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
             const updatedContent = content.replace(/\n/g, '\\n');
-            console.log(updatedContent)
+            console.log(updatedContent);
             const diffArray = JSON.parse(updatedContent);
             const fileLinesMap = new Map();
 
