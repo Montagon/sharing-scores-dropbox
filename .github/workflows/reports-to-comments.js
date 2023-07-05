@@ -72,7 +72,7 @@ function getModifiedFiles(content) {
     jsonContent.forEach(diff => {
       const { filename, patch } = diff;
 
-      const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
+      const patchLines = patch.match(/@@ -\d+,\d+ \+(\d+),(\d+) @@/);
       if (patchLines) {
         const startLine = parseInt(patchLines[1], 10);
         endLine = startLine + parseInt(patchLines[2], 10) - 1;
