@@ -65,7 +65,8 @@ function addComments(github, context, modifiedFiles) {
 function getModifiedFiles(content) {
     console.log(content)
     const fileLinesMap = new Map();
-    content.forEach(diff => {
+    content2 = JSON.parse(content)
+    content2.forEach(diff => {
       const { filename, patch } = diff;
 
       const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
