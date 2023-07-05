@@ -3,11 +3,15 @@ module.exports = ({github, context}) => {
 }
 
 function manageComments(github, context) {
-    prNumber = context.issue.number
-    console.log(prNumber)
+    const fs = require('fs')
+    const ev = JSON.parse(
+      fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')
+    )
+    const prNum = ev.pull_request.number
+    console.log(prNum)
     url = github.repositoryUrl +
         "/security/code-scanning?query=pr%3A"+
-        prNumber +
+        prNum +
         "+tool%3AFormalm+is%3Aopen"
     const body = "FormaLM has performed a code analysis" +
         "and generated a report." +
