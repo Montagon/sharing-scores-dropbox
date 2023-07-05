@@ -8,6 +8,7 @@ function manageComments(github, context) {
       fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')
     )
     repositoryUrl = github.server_url+"/"+github.repository
+    console.log(repositoryUrl)
     const prNum = ev.pull_request.number
     console.log(prNum)
     url = repositoryUrl +
