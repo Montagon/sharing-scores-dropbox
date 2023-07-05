@@ -23,30 +23,18 @@ jobs:
             OWNER: ${{ github.repository_owner }}
             REPO: ${{ github.event.repository.name }}
             PULL_NUMBER: ${{ github.event.pull_request.number }}
-      - name: Showing content
+      - name: Create review comment
         uses: actions/github-script@v6
-        with:
-          script: |
-            const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
-            const fileLinesMap = new Map();
-            content.forEach(diff => {
-              const { filename, patch } = diff;
-
-              const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
-              if (patchLines) {
-                const startLine = parseInt(patchLines[1], 10);
-                endLine = startLine + parseInt(patchLines[2], 10) - 1;
-                if(endLine < 0)
-                  endLine = 0
-                fileLinesMap.set(filename, { startLine, endLine });
-              }
-            });
-            console.log(fileLinesMap);
-      - uses: actions/github-script@v6
         env:
           DATA: ${{steps.listFiles.outputs.JSON_CONTENT}}
         with:
           script: |
             const script = require('./.github/workflows/reports-to-comments.js');
+            script({github, context});
+      - name: Create link to security
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('./.github/workflows/comment-link-security.js');
             script({github, context});
 
