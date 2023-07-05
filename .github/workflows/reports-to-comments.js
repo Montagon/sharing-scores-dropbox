@@ -1,9 +1,9 @@
-module.exports = ({github, context, diff}) => {
-  manageComments(github, context, diff);
+module.exports = ({github, context}) => {
+  manageComments(github, context);
 }
 
-function manageComments(github, context, content) {
-    console.log(content)
+function manageComments(github, context) {
+    console.log(process.env.DATA)
     //const modifiedFiles = getModifiedFiles(content);
     console.log("a ver...");
     console.log(modifiedFiles);
