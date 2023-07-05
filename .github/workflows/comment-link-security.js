@@ -7,10 +7,8 @@ function manageComments(github, context) {
     const ev = JSON.parse(
       fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')
     )
-    repositoryUrl = github.server_url+"/"+github.repository
-    console.log(repositoryUrl)
+    repositoryUrl = process.env.URL
     const prNum = ev.pull_request.number
-    console.log(prNum)
     url = repositoryUrl +
         "/security/code-scanning?query=pr%3A"+
         prNum +

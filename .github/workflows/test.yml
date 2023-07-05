@@ -33,6 +33,8 @@ jobs:
             script({github, context});
       - name: Create link to security
         uses: actions/github-script@v6
+        env:
+          URL: ${{ github.server_url }}/${{ github.repository }}
         with:
           script: |
             const script = require('./.github/workflows/comment-link-security.js');
