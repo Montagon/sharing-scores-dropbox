@@ -1,5 +1,7 @@
 module.exports = ({github, context, diff}) => {
-  const modifiedFiles = getModifiedFiles(diff)
+  const modifiedFiles = getModifiedFiles(diff);
+  console.log("a ver...");
+  console.log(modifiedFiles);
   addComments(github, context, modifiedFiles);
 }
 

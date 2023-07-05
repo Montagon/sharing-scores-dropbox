@@ -47,5 +47,6 @@ jobs:
           script: |
             const script = require('./.github/workflows/reports-to-comments.js');
             const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
+            console.log(content);
             script({github, context, content})
 
