@@ -45,36 +45,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const fs = require('fs');
-            const execSync = require('child_process').execSync;
-            const files = execSync('find iac-suggestions/ -type f').toString().split('\n').filter(Boolean);
-            const comments = [];
-            files.forEach(file => {
-              const filename = file.substring(file.lastIndexOf("/") + 1, file.lastIndexOf("."));
-              const info = filename.split("-");
-            
-              const body = fs.readFileSync(file, 'utf8').split("\n");
-              const path = body.shift();
-              const side = "RIGHT";
-              const start_line = parseInt(info[info.length - 2]);
-              const start_side = "RIGHT";
-              const line = parseInt(info[info.length - 1]);
-              const comment = {
-                body: body.join("\n"),
-                path: path,
-                side: side,
-                start_line: start_line,
-                start_side: start_side,
-                line: line
-              };
-              comments.push(comment);
-            });
-            github.rest.pulls.createReview({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-                commit_id: context.payload.pull_request.head.sha,
-                event: 'COMMENT',
-                comments: comments
-              });
+            const script = require('./.github/workflows/reports-to-comments.js')
+            const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
+            script({github, context, content})
 
