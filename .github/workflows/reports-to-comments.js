@@ -78,5 +78,5 @@ function getModifiedFiles(content) {
 }
 
 function check(startLine, endLine, fileLinesMap){
-  return startLine >= fileLinesMap.startLine && endLine <= fileLinesMap.endLine
+  return startLine >= fileLinesMap.startLine && endLine <= fileLinesMap.endLine;
 }
