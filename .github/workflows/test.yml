@@ -44,7 +44,7 @@ jobs:
             console.log(fileLinesMap);
       - uses: actions/github-script@v6
         env:
-          DATA: ${{steps.listFiles.outputs.JSON_CONTENT}};
+          DATA: ${{steps.listFiles.outputs.JSON_CONTENT}}
         with:
           script: |
             const script = require('./.github/workflows/reports-to-comments.js');
