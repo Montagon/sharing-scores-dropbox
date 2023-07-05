@@ -3,7 +3,7 @@ module.exports = ({github, context, diff}) => {
 }
 
 function manageComments(github, context, content) {
-    const modifiedFiles = getModifiedFiles(diff);
+    const modifiedFiles = getModifiedFiles(content);
     console.log("a ver...");
     console.log(modifiedFiles);
     addComments(github, context, modifiedFiles);
