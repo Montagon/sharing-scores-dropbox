@@ -13,8 +13,8 @@ function manageComments(github, context) {
         "/security/code-scanning?query=pr%3A"+
         prNum +
         "+tool%3AFormalm+is%3Aopen"
-    const body = "FormaLM has performed a code analysis" +
-        "and generated a report." +
+    const body = "FormaLM has performed a code analysis " +
+        "and generated a report. " +
         "Please check the [Security report]("+url+") "+
         "for more information."
     github.rest.issues.createComment({
