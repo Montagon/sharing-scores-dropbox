@@ -58,7 +58,6 @@ function addComments(github, context, modifiedFiles) {
 }
 
 function getModifiedFiles(diff) {
-    const content = ${{steps.listFiles.outputs.JSON_CONTENT}};
     const fileLinesMap = new Map();
     content.forEach(diff => {
       const { filename, patch } = diff;
