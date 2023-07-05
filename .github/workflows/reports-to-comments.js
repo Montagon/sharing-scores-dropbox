@@ -32,15 +32,25 @@ function addComments(github, context, modifiedFiles) {
         const body = fs.readFileSync(file, 'utf8').split("\n");
         const targetPath = body.shift(); // side-effectful: gets path and removes first line from body
         if(modifiedFiles.has(targetPath) && check(startLine, endLine, modifiedFiles.get(targetPath))){
-            const suggestion = {
-              body: body.join("\n"),
-              path: targetPath,
-              side: "RIGHT",
-              start_line: startLine,
-              start_side: "RIGHT",
-              line: endLine
-            };
-            suggestions.push(suggestion);
+            if (startLine == endLine) {
+                const suggestion = {
+                  body: body.join("\n"),
+                  path: targetPath,
+                  side: "RIGHT",
+                  line: startLine
+                };
+                suggestions.push(suggestion);
+            } else {
+                const suggestion = {
+                  body: body.join("\n"),
+                  path: targetPath,
+                  side: "RIGHT",
+                  start_line: startLine,
+                  start_side: "RIGHT",
+                  line: endLine
+                };
+                suggestions.push(suggestion);
+            }
         } else {
             console.log(`File ${targetPath} out of bounds or not present in diff`)
         }
