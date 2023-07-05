@@ -4,7 +4,6 @@ module.exports = ({github, context}) => {
 
 function manageComments(github, context) {
     const modifiedFiles = getModifiedFiles(process.env.DATA);
-    console.log(modifiedFiles);
     addComments(github, context, modifiedFiles);
 }
 
@@ -77,7 +76,6 @@ function getModifiedFiles(content) {
         fileLinesMap.set(filename, { startLine, endLine });
       }
     });
-    console.log(fileLinesMap);
     return fileLinesMap;
 }
 
