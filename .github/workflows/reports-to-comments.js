@@ -11,7 +11,7 @@ function manageComments(github, context) {
 function addComments(github, context, modifiedFiles) {
     const fs = require('fs');
     const execSync = require('child_process').execSync;
-    const files = execSync('find /home/gradle/reports/ -type f').toString().split('\n').filter(Boolean);
+    const files = execSync('find iac-suggestions/ -type f').toString().split('\n').filter(Boolean);
 
     const suggestions = [];
 
@@ -63,10 +63,9 @@ function addComments(github, context, modifiedFiles) {
 }
 
 function getModifiedFiles(content) {
-    console.log(content)
     const fileLinesMap = new Map();
-    content2 = JSON.parse(content)
-    content2.forEach(diff => {
+    jsonContent = JSON.parse(content)
+    jsonContent.forEach(diff => {
       const { filename, patch } = diff;
 
       const patchLines = patch.match(/@@ -(\d+),(\d+) \+\d+,\d+ @@/);
