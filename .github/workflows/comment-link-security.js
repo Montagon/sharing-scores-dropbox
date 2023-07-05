@@ -18,7 +18,7 @@ function manageComments(github, context) {
         "Please check the [Security report]("+url+") "+
         "for more information."
     github.rest.issues.createComment({
-      issue_number: contex.issue.number,
+      issue_number: context.issue.number,
       owner: context.repo.owner,
       repo: context.repo.repo,
       body: body
