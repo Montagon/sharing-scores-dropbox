@@ -34,7 +34,7 @@ def test_generateScoreL():
     elementList = [
         {
             "name":  "guion",
-            "restrict-level": "testLevel",
+            "restrictLevel": "testLevel",
             "publishName": "TestName",
             "url": "testURL"
         }

@@ -21,7 +21,7 @@ def generateScore(scoreName, videoURL, elementList):
     header = f"""<h3><strong><a href="{videoURL}" target="_blank" rel="noopener">{scoreName}</a><br></strong></h3>"""
     result = header
     for e in elementList:
-        result = result + generateBlock(e["restrict-level"], e["publishName"], e["url"])
+        result = result + generateBlock(e["restrictLevel"], e["publishName"], e["url"])
     return result
 
 def writeScore(path, name, content):
