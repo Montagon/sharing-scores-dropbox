@@ -18,6 +18,8 @@ jobs:
     permissions:
       contents: read  #  to fetch code (actions/checkout)
       packages: read  #  to fetch packages (docker)
+      discussions: write
+      pull-requests: write
     defaults:
       run:
         shell: ${{ matrix.shell }}
@@ -53,13 +55,19 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
       - name: Setup OPENAI token
         run: echo "OPENAI_TOKEN=${{ secrets.OPENAI_TOKEN }} " >> $GITHUB_ENV
+      - name: Setup OPENAI_REQUEST_TIMEOUT
+        run: echo "OPENAI_REQUEST_TIMEOUT=60" >> $GITHUB_ENV
       - name: Adding Poetry to path
         run: echo "/root/.local/share/pypoetry/venv/bin" >> $GITHUB_PATH
       - name: Testing
         run: |
           poetry --version
       - name: Run FormaLM analysis
-        run: java -jar /home/gradle/formalm/formalm-0.0.1-SNAPSHOT.jar repo-path="$GITHUB_WORKSPACE" output-path="/home/gradle/report.sarif" scoverage-restrict-results=5
+        run: >
+          java -jar /home/gradle/formalm/formalm-0.0.1-SNAPSHOT.jar 
+          repo-path="$GITHUB_WORKSPACE" 
+          output-path="/home/gradle"
+          scoverage-restrict-results=5
       - name: Show SARIF file
         run: cat /home/gradle/report.sarif
       - name: Upload SARIF file
@@ -70,3 +78,29 @@ jobs:
           # Optional category for the results
           # Used to differentiate multiple results for one commit
           #category: my-analysis-tool
+      - name: List files
+        id: listFiles
+        run: |
+          jsonContent="$(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/$OWNER/$REPO/pulls/$PULL_NUMBER/files)"
+          echo "JSON_CONTENT="$jsonContent >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          PULL_NUMBER: ${{ github.event.pull_request.number }}
+      - name: Generate review comment
+        uses: actions/github-script@v6
+        env:
+          DATA: ${{steps.listFiles.outputs.JSON_CONTENT}}
+        with:
+          script: |
+            const script = require('./.github/workflows/scripts/reports-to-comments.js')
+            script({github, context})
+      - name: Create comment to GitHub Code Scanning results
+        uses: actions/github-script@v6
+        env:
+          URL: ${{ github.server_url }}/${{ github.repository }}
+        with:
+          script: |
+            const script = require('./.github/workflows/scripts/codeql-comment.js');
+            script({github, context});
