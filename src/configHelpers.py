@@ -1,6 +1,7 @@
 import json
 from collections import namedtuple
 from json import JSONEncoder
+import numpy as np
 
 class Instrument:
     def __init__(self, name, restrictLevel, publishName):
@@ -29,6 +30,7 @@ def getSearchElements(config):
     return res
 
 def getElementsWithURL(config, urls):
+    confs = np.array([])
     for i in range(0, len(urls)):
         config[i]["url"] = urls[i]
     return config
