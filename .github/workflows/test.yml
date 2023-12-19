@@ -1,0 +1,29 @@
+name: Publish base image to Docker Registry
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag'
+        required: true
+        default: 'latest'
+
+env:
+  IMAGE_NAME: brain-ai
+  REGISTRY: ghcr.io
+
+jobs:
+  # Push image to GitHub Packages.
+  # See also: https://docs.docker.com/docker-hub/builds/
+  publish-docker-image:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+
+      - name: Push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.event.inputs.tag }}" )
+          echo VERSION=$VERSION
